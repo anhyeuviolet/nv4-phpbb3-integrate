@@ -98,7 +98,7 @@ if (file_exists ( NV_ROOTDIR . '/' . DIR_FORUM . '/common.php' )) {
                 active=" . $user_info ['active'] . ",
                 last_login=" . NV_CURRENTTIME . ", 
                 last_ip=" . $db->quote ( $client_info ['ip'] ) . ", 
-                last_agent=" . $db->quote ( $client_info ['agent'] ) . "
+                last_agent=" . $db->quote ( NV_USER_AGENT ) . "
                 WHERE userid=" . $user_info ['userid'];
 		} else {
 			$sql = "INSERT INTO " . NV_USERS_GLOBALTABLE . " 
@@ -122,20 +122,58 @@ if (file_exists ( NV_ROOTDIR . '/' . DIR_FORUM . '/common.php' )) {
                 " . $user_info ['active'] . ", '', 
                 " . NV_CURRENTTIME . ", 
                 " . $db->quote ( $client_info ['ip'] ) . ", 
-                " . $db->quote ( $client_info ['agent'] ) . ", 
+                " . $db->quote ( NV_USER_AGENT ) . ", 
                 '' 
                 )";
-			if ($db->query ( $sql )) {
-				$error = "";
-			} else {
-				$error = $lang_module ['error_update_users_info'];
-			}
+		}
+		if ($db->query ( $sql )) {
+			$error = "";
+		} else {
+			$error = $lang_module ['error_update_users_info'];
 		}
 	} elseif ($status == 12) {
 		$error = $lang_module ['login_no_active'];
 	} else {
 		$error = $lang_global ['loginincorrect'];
 	}
+	if (empty ( $error )) {
+		$user_info ['last_ip'] = $client_info ['ip'];
+		$user_info ['last_agent'] = NV_USER_AGENT;
+		$user_info ['last_openid'] = "";
+		$user_info ['last_login'] = NV_CURRENTTIME;
+		$remember = 1;
+		$checknum = nv_genpass ( 10 );
+		$checknum = $crypt->hash ( $checknum );
+		$user = array ( //
+				'userid' => $user_info ['userid'], //
+				'checknum' => $checknum, //
+				'current_agent' => NV_USER_AGENT, //
+				'last_agent' => $user_info ['last_agent'], //
+				'current_ip' => $client_info ['ip'], //
+				'last_ip' => $user_info ['last_ip'], //
+				'current_login' => NV_CURRENTTIME, //
+				'last_login' => intval ( $user_info ['last_login'] ), //
+				'last_openid' => $user_info ['last_openid'], //
+				'current_openid' => '' 
+		);
+		
+		$user = nv_base64_encode ( serialize ( $user ) );
+		$opid = "";
+		$db->query ( "UPDATE " . NV_USERS_GLOBALTABLE . " SET 
+		checknum = " . $db->quote ( $checknum ) . ", 
+		last_login = " . NV_CURRENTTIME . ", 
+		last_ip = " . $db->quote ( $client_info ['ip'] ) . ", 
+		last_agent = " . $db->quote ( NV_USER_AGENT ) . ", 
+		last_openid = " . $db->quote ( $opid ) . ", 
+		remember = " . $remember . " 
+		WHERE userid=" . $user_info ['userid'] );
+		
+		$live_cookie_time = ($remember) ? NV_LIVE_COOKIE_TIME : 0;
+		
+		$nv_Request->set_Cookie ( 'nvloginhash', $user, $live_cookie_time );
+		$nv_Request->set_Session ( 'nvloginhash', $user );
+	}
+	
 } else {
 	trigger_error ( "Error no forum phpbb", 256 );
 }
