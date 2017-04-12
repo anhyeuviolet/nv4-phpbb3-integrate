@@ -28,7 +28,34 @@ Tích hợp NukeViet 4 và phpBB 3.2.x/3.1.x/3.0.x
 (Diễn đàn và portal phải cùng 1 cơ sở dữ liệu)
 
 
-4) Đăng nhập với quyền Quản trị tối cao (God Administrator).
+4) Download các file sau:
+
+https://github.com/anhyeuviolet/nv4-phpbb3-integrate/tree/master/NukeViet_Files
+
+Copy thư mục `nukeviet` vào thư mục chứa forum phpbb
+
+Khi đó phải tồn tại các file sau:
+
+> forum/nukeviet/changepass.php
+
+> forum/nukeviet/editinfo.php
+
+> forum/nukeviet/is_user.php
+
+> forum/nukeviet/login.php
+
+> forum/nukeviet/logout.php
+
+> forum/nukeviet/lostpass.php
+
+> forum/nukeviet/register.php
+
+
++ Thư mục chứa forum phải ngang hàng với file index.php và mainfile.php của Nukeviet.
+
+
+
+5) Đăng nhập với quyền Quản trị tối cao (God Administrator).
 
 
 Truy cập vào:
@@ -53,30 +80,6 @@ Nhấn lưu lại.
 Khi đó có thể bỏ qua bước 8 bên dưới để giữ lại hoàn toàn các thành viên đang có của NukeViet.
 
 
-5) Download các file sau:
-
-https://github.com/anhyeuviolet/nv4-phpbb3-integrate/tree/master/NukeViet_Files
-
-Copy thư mục `nukeviet` vào thư mục chứa forum phpbb
-
-Khi đó phải tồn tại các file sau:
-
-> forum/nukeviet/changepass.php
-
-> forum/nukeviet/editinfo.php
-
-> forum/nukeviet/is_user.php
-
-> forum/nukeviet/login.php
-
-> forum/nukeviet/logout.php
-
-> forum/nukeviet/lostpass.php
-
-> forum/nukeviet/register.php
-
-
-+ Thư mục chứa forum phải ngang hàng với file index.php và mainfile.php của Nukeviet.
 
 6) Download file sau:
 

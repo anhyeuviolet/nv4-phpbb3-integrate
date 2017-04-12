@@ -11,7 +11,7 @@ if (! defined ( 'NV_IS_MOD_USER' ))
 
 define ( 'IN_PHPBB', true );
 
-if (file_exists ( NV_ROOTDIR . '/' . $global_config['dir_forum'] . '/common.php' )) {
+if (file_exists ( NV_ROOTDIR . '/' . DIR_FORUM . '/common.php' )) {
 	$db_nkv = $db;
 	$op_nkv = $op;
 	$cache_nkv = $cache;
@@ -20,7 +20,7 @@ if (file_exists ( NV_ROOTDIR . '/' . $global_config['dir_forum'] . '/common.php'
 	global $user, $auth, $template, $cache, $db, $config, $phpEx, $phpbb_root_path;
 	
 	$phpEx = 'php';
-	$phpbb_root_path = NV_ROOTDIR . '/' . $global_config['dir_forum'] . '/';
+	$phpbb_root_path = NV_ROOTDIR . '/' . DIR_FORUM . '/';
 
 	include ($phpbb_root_path . 'common.' . $phpEx);
 	
