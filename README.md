@@ -1,6 +1,8 @@
-NukeViet 4.0.29 - 4.1 Beta (Tested) phpBB 3.0.14 is maximum
+NukeViet 4.0.29 - 4.1 Beta => NukeViet_4.0.29-4.1_Files
+NukeViet 4.1.01  => NukeViet_4.1.01_Files
 
-Tích hợp NukeViet 4 và phpBB 3.0.14
+
+Tích hợp NukeViet 4 và phpBB 3.2.x/3.1.x/3.0.x
 
 ------------------------------------------------------------
 
