@@ -13,7 +13,9 @@ define ( 'IN_PHPBB', true );
 
 if (file_exists ( NV_ROOTDIR . '/' . DIR_FORUM . '/common.php' )) {
 	$db_nkv = $db;
-	$op_nkv = $op;
+	if(isset($op) and !empty($op)){
+		$op_nkv = $op;
+	}
 	$cache_nkv = $cache;
 	unset($cache);
 	
@@ -62,7 +64,9 @@ if (file_exists ( NV_ROOTDIR . '/' . DIR_FORUM . '/common.php' )) {
 	define ( 'USER_FOUNDER', 3 );
 	
 	$db = $db_nkv;
-	$op = $op_nkv;
+	if(isset($op_nkv) and !empty($op_nkv)){
+		$op_nkv = $op;
+	}
 	$cache = $cache_nkv;
 	if ($status == 3) {
 		$user_info = $result ['user_row'];
